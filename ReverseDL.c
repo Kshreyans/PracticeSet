@@ -4,38 +4,35 @@
 Node* Reverse(Node* head)
 {
     Node *h,*ptr,*last;
-    ptr=h=last=NULL;
+    ptr=head;
+    h=last=NULL;
     
-    if(head==NULL)
+     if(head==NULL)
         return head;
     else
-     { ptr=head;
-        
-        if(h==NULL)
-          { while(ptr->next!=NULL)
-              ptr=ptr->next;
-            h=ptr;
-            ptr->next=ptr->prev;
-            ptr->prev->next=NULL;
-            ptr->prev=NULL;
-            last=ptr;
-          }   
-         else
-          { 
-             while(ptr!=NULL)
+     {  
+             while(last!=head)
              { ptr=head;
               
-               while(ptr->next!=NULL )
+               while(ptr->next!=last)
                  ptr=ptr->next;
-              
-                ptr->prev->next=NULL;
-                ptr->next=ptr->prev;
-                ptr->prev=last;
-                
-             }
-         }   
         
+                  if(h==NULL)
+                   {  h=ptr; 
+                      ptr->next=ptr->prev;
+                      ptr->prev=NULL;
+                      last=ptr;
+                   }
+                 else
+                  {
+                    last=ptr->next;
+                    ptr->next=ptr->prev;
+                    ptr->prev=last;  
+                    last=ptr;
+                 }
+             }
     }
+   
+    
     return h;
 }
-
