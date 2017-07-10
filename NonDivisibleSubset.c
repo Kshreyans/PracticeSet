@@ -3,58 +3,47 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-int first_element(int *a,int n,int k){
-
-   int i,j,max,c,max_i;
-       max=c=max_i=0;
-  
-    for(i=0; i<n; i++){
-    c=0;
-        for(j=0; j<n; j++){
-              if((a[i]+a[j])%k!=0)      
-                 c++;   
-        }
-          if(c>max)
-          { max=c;max_i=a[i];
-          }
-    }
-    
-   return max_i;
-}
- 
- int LargestSet(int *a,int n,int k){
+ int maximalSubset(int a[],int k){
+        int c=0,v=k/2;
+       
+       if(k%2==0)
+        { v--;
+         if(a[k/2]>=1)
+          c=c+1;
+        }  
         
-     int *s=NULL,c=1,i,j,f;   
-     s=(int *)malloc(sizeof(int)*n);    
-     s[0]=first_element(a,n,k);
-  
-     for(i=0; i<n ; i++){
-        f=0;
-       if(a[i]!=s[0])         
-        {       for(j=0; j<c; j++)
-                 { if((s[j]+a[i])%k==0)
-                        f=1;
-                 }
-                if(f==0)
-                s[c++]=a[i];
+        if(a[0]>=1)
+         c+=1;
+            
+        for(int i=1 ; i<= v ; i++){
+                if(a[i]>a[k-i]) 
+                  c=a[i]+c;
+                 else
+                  c=a[k-i]+c;          
         }
-      }  
-   
     return c;
 }
- 
- 
- 
- 
+
+
+
  int main(){
   
         int n,k,*a=NULL;
+        long int p;
      scanf("%d%d",&n,&k);    
+   if(k==1)
+   { printf("1"); return 0;}
    
-   a=(int *)malloc(sizeof(int)*n);
+   a=(int *)malloc(sizeof(int)*k);
    
-   for(int i=0; i<n; i++)
-        scanf("%d",&a[i]);
-   printf("%d",LargestSet(a,n,k));
+   for(int i=0; i<k ; i++)
+        a[i]=0;
+      
+    for(int i=0; i<n; i++){
+       scanf("%ld",&p);
+       a[p%k]++;                                                                
+     }
+     
+     printf("%d",maximalSubset(a,k));
  return 0;
 }
