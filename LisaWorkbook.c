@@ -12,7 +12,7 @@ int main() {
      
     for(i=1; t<n; i++ ){
        
-       for(j=0; j<3 && r<ch[t]; j++){
+      for(j=0; j<k && r<ch[t]; j++){
             p[j]=++r;
             
             if(i==r)
