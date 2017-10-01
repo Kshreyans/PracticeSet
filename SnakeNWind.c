@@ -1,5 +1,6 @@
 //https://www.hackerrank.com/contests/university-codesprint-3/challenges/the-snake-vs-the-wind
 
+
 #include<stdio.h>
 int n,c=1;
 
@@ -40,17 +41,18 @@ int main(){
         scanf("%d%d",&x,&y);
         
         int a[n][n],i,j,ch;
-        
-        for(i=0; i<n; i++)
+      
+           for(i=0; i<n; i++)
                 for(j=0; j<n; j++)
                   a[i][j]=0;
+        
         switch(wind){
         
         case 'e':    if(y==0)
                      {  
                       for(j=0; j<n; j++)
-                       { a[x][j]=c++; printf("a[%d][%d]=%d\n",x,j,c-1);}
-                        y=n-1; printf("-------");
+                       { a[x][j]=c++;}
+                        y=n-1;
                      }break;
                         
         case 'w':    if(y==(n-1))
@@ -74,8 +76,7 @@ int main(){
                         x=n-1;
                      }break;
         }
-        
-        printf("x=%d  y=%d\n",x,y);
+       
         if(x==0 && y==0)
           ch=1;
         else              
@@ -87,9 +88,8 @@ int main(){
         else
         if(x==(n-1) && y==(n-1))
           ch=4;
-        printf("ch=%d\n",ch);
       
-        i=x;j=y;
+       i=x;j=y;
         switch(ch){
         
         case 1:
@@ -120,7 +120,7 @@ int main(){
                 else
                 {       while(j>=0){
                         vertU2D(a,0,j--);
-                        if(j<n)
+                        if(j>=0)
                         vertD2U(a,n-1,j--);
                         }
                 }
@@ -130,9 +130,9 @@ int main(){
         case 3:
                 if(wind=='n' || wind=='s')
                  {         while(i>=0){
-                             horiL2R(a,i++,0);
-                             if(i<n)                 
-                             horiR2L(a,i++,n-1);
+                             horiL2R(a,i--,0);
+                             if(i>=0)                 
+                             horiR2L(a,i--,n-1);
                         }
                 }
                 else
@@ -147,15 +147,15 @@ int main(){
         case 4:
                 if(wind=='n' || wind=='s')
                  {         while(i>=0){
-                             horiL2R(a,i--,n-1);
-                             if(i<n)                 
-                             horiR2L(a,i--,0);
+                             horiR2L(a,i--,n-1);
+                             if(i>=0)                 
+                             horiL2R(a,i--,0);
                         }
                 }
                 else
                 {       while(j>=0){
                         vertD2U(a,n-1,j--);
-                        if(j<n)
+                        if(j>=0)
                         vertU2D(a,0,j--);
                         }
                 }
