@@ -30,32 +30,35 @@ void separateNumbers(char* s) {
         int len,p,n,i,k=1,f=0,h;
         len=strlen(s);
         
-        p=ConvertToInt(0,0,s);
+        for( i=0; s[i]=='9'; i++) k++;
         
-        if( p == 9 )
-          k++;
-          
-      int  d=1;
+        if(i>=1)
+        k--;
+       
+        p=ConvertToInt(0,k-1,s);
+        
+        printf("%d --k\n",k);
+      int  d=0;
       
-        for( i=1 ; i<len; i=i+k ){
+        for( i=k++ ; i<len; i=i+k ){
         
                 n=ConvertToInt(i,i+k-1,s);        
-                
-                if( (n-p)!=1 ){
+                printf("%d ----\n",n);
+                if( i!=0 && (n-p)!=1 ){
                     k++;
                     i=-k;
-                    d=k-1;
+                    d=k;
                 }
+                        h=raise(k);
+                        if( (n+1)% h == 0 && (n+1)/h == 1 )
+                         k++;
                 
-                h=raise(k);
-                if( (n+1)% h == 0 && (n+1)/h == 1 )
-                k++;
+                        p=n;
                 
-                p=n;
+                        if( s[i]== '0' || k > len/2 )
+                         { f=1;printf("%d  ---k   %d len/2+1",k,1+ len/2);break; 
+                         }
                 
-                if( s[i]== '0' || k > len/2 )
-                 { f=1; break;
-                 }
         }
       
                 if( f==1 ){
