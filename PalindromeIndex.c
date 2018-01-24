@@ -11,20 +11,21 @@ int palindromeIndex(char* s){
     for( i=0; i<=len/2; i++ ){
         printf("%c=%d   %c=%d ----",s[i],i,s[len-1-i-k],len-1-i-k);
         
-        if(s[i]!= s[len-1-i-k] ){
+          if(s[i]!= s[len-1-i-k] ){
+          
+            if(k!=0) 
+            {   i=c;
+                c=len-c-1;
+                k=k+2;
+            }
             
-            if(c!=-1)
-              return -1;
-             
             if(s[i+1]== s[len-1-i-k] )
-             { c=i; i++; k--; printf("%d  \n",c);}
-            
+             { c=i; i++; k--; }
             else
             if( s[i] == s[len-2-i-k] )
-             { c=len-1-i-k; k++; printf(" ++%d  \n",c);}  
+             { c=len-1-i; k++; } 
         }
         
-          
     }
     
     if( c==-1 )
