@@ -3,40 +3,51 @@
 #include<stdio.h>
 #include<stdlib.h>
 
+int find1(int a[], int max){
+
+        int i;
+        
+        for( i=0; i<26; i++ ){
+                if(a[i]!=0 && a[i]!=max)
+                 return 0;
+        }
+    return 1;    
+}
+
+
+
 char* isValid(char* s){
    
-    int i,a[26]={0},f=1,max=-1,k;
+    int i,a[26]={0},max=-1,k,j;
     
     for(i=0; s[i]!='\0'; i++ ){
        k=s[i]-'a';
         a[k]++;
         
-        if( a[k] > max )
-            max=a[k];
+        if(a[k]>max)
+        max=a[k];
     }
-        printf("%d max\n",max);
-            
-    for( i=0; i<26; i++ ){
+    
+    if( find1(a,max) )
+     return "YES";
         
-        if( a[i]!=0 && a[i]!= max ){
-            
-            if( f==1 ){
-                
-                if( a[i] == 1 )
-                     f=0;
-                else
-                if( max-a[i] == 1 ){
-                    max=a[i];f=0;
-                }else
-                   return "NO"; 
-            }else
-               return "NO"; 
-        }
+     for( i=0; i<26; i++ ){
+    
+        if( a[i]!=0 )
+         {      
+             a[i]--;
+             for( j=0; a[j]==0; j++ );
+             
+             if( find1(a,a[j]) )
+               return "YES";
+               
+             a[i]++;  
+         }
     }
-    
-    return "YES";
-    
-}
+       
+    return "NO";
+}    
+
 
 int main() {
     char* s = (char *)malloc(512000 * sizeof(char));
